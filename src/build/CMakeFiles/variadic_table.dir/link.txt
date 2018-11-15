@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libvariadic_table.a  CMakeFiles/variadic_table.dir/vt_utils.cpp.o
+/usr/bin/ranlib lib/libvariadic_table.a

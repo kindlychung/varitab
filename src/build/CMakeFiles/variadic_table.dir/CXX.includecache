@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kaiyin/cProjects/variadic_table_conan/src/vt_utils.cpp
+vt_utils.h
+/home/kaiyin/cProjects/variadic_table_conan/src/vt_utils.h
+
+/home/kaiyin/cProjects/variadic_table_conan/src/vt_utils.h
+iomanip
+-
+

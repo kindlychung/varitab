@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kaiyin/.conan/data/variadic_table/0.9.1/jzien/dev/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include/variadic_table.h
+cassert
+-
+cmath
+-
+cstring
+-
+iomanip
+-
+ios
+-
+iostream
+-
+string
+-
+tuple
+-
+type_traits
+-
+vector
+-
+
+/home/kaiyin/cProjects/variadic_table_conan/test_package/example.cpp
+iostream
+-
+variadic_table.h
+/home/kaiyin/cProjects/variadic_table_conan/test_package/variadic_table.h
+
