@@ -1,5 +1,5 @@
 #include <iostream>
-#include "variadic_table.h"
+#include "varitab.h"
 
 int main() {
     auto locale_string = "en_US.UTF-8";
