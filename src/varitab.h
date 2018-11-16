@@ -130,6 +130,7 @@ class VariadicTableWide {
      */
     template <typename StreamType>
     void print(StreamType &stream) {
+        setlocale(LC_ALL, "en_US.UTF-8");
         size_columns();
 
         // Start computing the total width

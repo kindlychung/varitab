@@ -2,10 +2,9 @@
 #include "varitab.h"
 
 int main() {
-    auto locale_string = "en_US.UTF-8";
-    setlocale(LC_ALL, locale_string);
-    std::locale loc(locale_string);
-    std::wcout.imbue(loc);
+    // auto locale_string = "en_US.UTF-8";
+    // std::locale loc(locale_string);
+    // std::wcout.imbue(loc);
 
     {
         VariadicTableWide<std::wstring, double, int, std::wstring> vt(
@@ -33,7 +32,7 @@ int main() {
 
         vt.setColumnPrecision({1, 3, 3, 2, 2});
 
-        vt.addRow({L"根目录", 0.4525, 0.051815, 0.05634, -1113});
+        vt.addRow({L"根目录::", 0.4525, 0.051815, 0.05634, -1113});
         vt.addRow({L"应用::安装", 1.33, 0.037072, 0.037082, 234});
         vt.addRow({L"初始化", 2.551, 0.001548, 0.001551, 77461});
         vt.addRow({L"Python爬取抖音APP,竟然只需要十行代码", 0.001548, 0,
@@ -42,7 +41,7 @@ int main() {
                    0.000243, -483461});
         vt.addRow({L"腾讯 阿里 华为的岗位薪资情况概述", 6.7e-05, 0.002233,
                    0.0023, 430061});
-        vt.addRow({L"程序员晒出小学儿子满分作文《我的爸爸》，真实的让人心疼",
+        vt.addRow({L"程序员晒出小学儿子满分作文《我的爸爸》, 真实的让人心疼",
                    0.002051, 0, 0.002051, 6678});
 
         vt.print(std::wcout);
