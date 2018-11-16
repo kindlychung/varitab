@@ -29,13 +29,30 @@ setw_type setww(int w, std::wstring s) {
 }
 
 template <typename StreamType>
-void print_horizontal_line(StreamType &stream, int total_width) {
-    // Print out the top line
-    for (int i = 0; i < total_width; i++) {
-        stream << L"\u2014";
+void print_horizontal_line(StreamType &stream, int total_width,
+                           wchar_t const start_char, wchar_t const line_char,
+                           wchar_t const end_char) {
+    stream << start_char;
+    for (int i = 0; i < total_width - 2; i++) {
+        stream << line_char;
     }
-    stream << L"\n";
+    stream << end_char << L"\n";
     return;
+}
+
+template <typename StreamType>
+void print_header_line_top(StreamType &stream, int total_width) {
+    print_horizontal_line(stream, total_width, L'╒', L'═', L'╕');
+}
+
+template <typename StreamType>
+void print_header_line_bottom(StreamType &stream, int total_width) {
+    print_horizontal_line(stream, total_width, L'├', L'─', L'┤');
+}
+
+template <typename StreamType>
+void print_bottom_line(StreamType &stream, int total_width) {
+    print_horizontal_line(stream, total_width, L'└', L'─', L'┘');
 }
 
 /**
@@ -69,7 +86,7 @@ class VariadicTableWide {
     StreamType &_print_row(StreamType &stream, std::wstring val, int w) {
         stream << std::wstring(_cell_padding, L' ') << setww(w, val)
                << justify<decltype(val)>(0) << val
-               << std::wstring(_cell_padding, L' ') << L"┋";
+               << std::wstring(_cell_padding, L' ');
         return stream;
     }
 
@@ -77,7 +94,7 @@ class VariadicTableWide {
     StreamType &_print_row(StreamType &stream, T val, int w) {
         stream << std::wstring(_cell_padding, L' ') << std::setw(w)
                << justify<decltype(val)>(0) << val
-               << std::wstring(_cell_padding, L' ') << L"┋";
+               << std::wstring(_cell_padding, L' ');
         return stream;
     }
 
@@ -116,17 +133,18 @@ class VariadicTableWide {
         size_columns();
 
         // Start computing the total width
-        // First - we will have _num_columns + 1 "┋" characters
-        unsigned int total_width = _num_columns + 1;
+        // First - we will have two vertical bar at left and and right end of
+        // the table
+        unsigned int total_width = 2;
 
         // Now add in the size of each colum
         for (auto &col_size : _column_sizes)
             total_width += col_size + (2 * _cell_padding);
 
-        print_horizontal_line(stream, total_width);
+        print_header_line_top(stream, total_width);
 
         // Print out the headers
-        stream << L"┋";
+        stream << L"│";
         for (unsigned int i = 0; i < _num_columns; i++) {
             // Must find the center of the column
             //   int header_width = wcswidth(_headers[i].c_str(),
@@ -136,23 +154,23 @@ class VariadicTableWide {
 
             stream << std::wstring(_cell_padding, L' ')
                    << setww(_column_sizes[i], _headers[i]) << std::left
-                   << _headers[i] << std::wstring(_cell_padding, L' ') << L"┋";
+                   << _headers[i] << std::wstring(_cell_padding, L' ');
         }
 
-        stream << L"\n";
+        stream << L"│\n";
 
         // Print out the line below the header
-        print_horizontal_line(stream, total_width);
+        print_header_line_bottom(stream, total_width);
 
         // Now print the rows of the table
         for (auto &row : _data) {
-            stream << L"┋";
+            stream << L"│";
             print_each(row, stream);
-            stream << L"\n";
+            stream << L"│\n";
         }
 
         // Print out the line below the header
-        print_horizontal_line(stream, total_width);
+        print_bottom_line(stream, total_width);
     }
 
     /**
