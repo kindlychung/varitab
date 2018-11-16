@@ -1,5 +1,13 @@
 # varitab: a c++ library for pretty printing tables
 
+Based on [this repo](https://github.com/friedmud/variadic_table), with the following changes/enhancements:
+
+* Draw table borders using unicode characters
+* Use `std::wstring` all over
+* Support CJK characters
+* Support `conan` package management
+
+
 # Install
 
 ```
